@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerAnim : MonoBehaviour
 {
@@ -19,6 +18,14 @@ public class PlayerAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        OnMove();
+        OnRun();
+        OnRotate();
+    }
+
+
+    void OnMove()
+    {
         if (player.Direction.sqrMagnitude > 0)
         {
             anim.SetInteger("transition", 1);
@@ -27,7 +34,18 @@ public class PlayerAnim : MonoBehaviour
         {
             anim.SetInteger("transition", 0);
         }
+    }
 
+    void OnRun()
+    {
+        if (player.IsRuning)
+        {
+            anim.SetInteger("transition", 2);
+        }
+    }
+
+    void OnRotate()
+    {
         if (player.Direction.x > 0)
         {
             RotateScale(1f);
@@ -37,7 +55,6 @@ public class PlayerAnim : MonoBehaviour
             RotateScale(-1f);
         }
     }
-
 
     //Rotate the player in scale
     private void RotateScale(float value)
