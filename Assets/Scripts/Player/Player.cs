@@ -3,8 +3,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rig;
-    private Vector2 direction;
     public float speed;
+    
+    private Vector2 direction;
+    public Vector2 Direction { get => direction; private set => direction = value; }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
