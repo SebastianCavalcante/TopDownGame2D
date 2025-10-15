@@ -11,7 +11,10 @@ public class Player : MonoBehaviour
     public Vector2 Direction { get => direction; private set => direction = value; }
 
     private bool isRuning;
+    private bool isRolling;
+
     public bool IsRuning { get => isRuning; private set => isRuning = value; }
+    public bool IsRolling { get => isRolling; private set => isRolling = value; }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,6 +28,7 @@ public class Player : MonoBehaviour
     {
         OnInput();
         OnRun();
+        OnRolling();
     }
 
     private void FixedUpdate()
@@ -57,6 +61,19 @@ public class Player : MonoBehaviour
             isRuning = false;
         }
         
+    }
+
+    private void OnRolling()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            isRolling = true;
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            isRolling = false;
+        }
     }
     #endregion
 }
