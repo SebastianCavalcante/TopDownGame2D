@@ -32,6 +32,8 @@ public class DialogueControll : MonoBehaviour
 
     public static DialogueControll instance;
 
+    public bool IsShowing { get => isShowing; set => isShowing = value; }   
+
     private void Awake()
     {
         instance = this;
