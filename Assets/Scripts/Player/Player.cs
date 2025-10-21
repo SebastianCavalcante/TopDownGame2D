@@ -12,9 +12,11 @@ public class Player : MonoBehaviour
 
     private bool isRuning;
     private bool isRolling;
+    private bool isCuting;
 
     public bool IsRuning { get => isRuning; private set => isRuning = value; }
     public bool IsRolling { get => isRolling; private set => isRolling = value; }
+    public bool IsCuting { get => isCuting; private set => isCuting = value; }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
         OnInput();
         OnRun();
         OnRolling();
+        OnCuting();
     }
 
     private void FixedUpdate()
@@ -75,5 +78,21 @@ public class Player : MonoBehaviour
             isRolling = false;
         }
     }
+    
+    private void OnCuting()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            isCuting = true;
+            speed = 0;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isCuting = false;
+            speed = initialSpeed;
+        }
+    }
+
     #endregion
 }
