@@ -20,6 +20,7 @@ public class PlayerAnim : MonoBehaviour
     {
         OnMove();
         OnRun();
+        OnCuting();
         OnRotate();
     }
 
@@ -49,6 +50,14 @@ public class PlayerAnim : MonoBehaviour
         if (player.IsRuning)
         {
             anim.SetInteger("transition", 2);
+        }
+    }
+
+    void OnCuting()
+    {
+        if (player.IsCuting)
+        {
+            anim.SetInteger("transition", 3);
         }
     }
 
