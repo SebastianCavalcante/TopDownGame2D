@@ -5,6 +5,7 @@ public class Tree : MonoBehaviour
     private Animator treeAnim;
     [Header("Tree Settings")]
     [SerializeField] private float treeHealth;
+    [SerializeField] private ParticleSystem treeLeaves;
 
     [Header("Drop Settings")]
     [SerializeField] private GameObject woodItemPrefab;
@@ -37,6 +38,7 @@ public class Tree : MonoBehaviour
         {
             treeHealth--;
             treeAnim.SetTrigger("isCutting");
+            treeLeaves.Play();
         }
         else if (treeHealth <= 0)
         {
