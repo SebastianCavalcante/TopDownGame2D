@@ -3,11 +3,32 @@ using UnityEngine;
 public class Tree : MonoBehaviour
 {
     private Animator treeAnim;
+    [Header("Tree Settings")]
     [SerializeField] private float treeHealth;
+
+    [Header("Drop Settings")]
+    [SerializeField] private GameObject woodItemPrefab;
+    [SerializeField] private int dropTotalItem;
+    [SerializeField] private float dropDistance;
 
     private void Start()
     {
         treeAnim = GetComponent<Animator>();
+    }
+
+    // Drop Item in game
+    private void DropItem()
+    {
+        for (int i = 0; i < dropTotalItem; i++)
+        {
+            Instantiate(woodItemPrefab, transform.position + RandomDrop(), transform.rotation);
+        }
+    }
+
+    //Return the random position to drop to wood.
+    private Vector3 RandomDrop()
+    {
+        return new Vector3(Random.Range(-dropDistance, dropDistance), Random.Range(-dropDistance, dropDistance), 0);
     }
 
     private void TreeOnHit()
@@ -17,11 +38,10 @@ public class Tree : MonoBehaviour
             treeHealth--;
             treeAnim.SetTrigger("isCutting");
         }
-       
-
-        if (treeHealth <= 0)
+        else if (treeHealth <= 0)
         {
             treeAnim.SetInteger("transition", 1);
+            DropItem();
         }
     }
 
