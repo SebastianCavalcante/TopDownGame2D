@@ -137,3 +137,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c954424d7b27a241ae1150c9b24d437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slideSpeed: 10
+  totalDistance: 0.2
