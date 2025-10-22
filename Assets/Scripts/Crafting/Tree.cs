@@ -12,6 +12,8 @@ public class Tree : MonoBehaviour
     [SerializeField] private int dropTotalItem;
     [SerializeField] private float dropDistance;
 
+    private bool isCut = false;
+
     private void Start()
     {
         treeAnim = GetComponent<Animator>();
@@ -36,12 +38,14 @@ public class Tree : MonoBehaviour
     {
         if (treeHealth > 0)
         {
+            isCut = false;
             treeHealth--;
             treeAnim.SetTrigger("isCutting");
             treeLeaves.Play();
         }
         else if (treeHealth <= 0)
         {
+            isCut = true;
             treeAnim.SetInteger("transition", 1);
             DropItem();
         }
@@ -49,7 +53,7 @@ public class Tree : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Axe"))
+        if (collision.CompareTag("Axe") && !isCut)
         {
             TreeOnHit();
         }
