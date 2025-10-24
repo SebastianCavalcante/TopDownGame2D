@@ -20,8 +20,8 @@ public class PlayerAnim : MonoBehaviour
     {
         OnMove();
         OnRun();
-        OnCuting();
         OnRotate();
+        OnInteractionTool();
     }
 
 
@@ -53,12 +53,34 @@ public class PlayerAnim : MonoBehaviour
         }
     }
 
-    void OnCuting()
+    void OnInteractionTool()
     {
-        if (player.IsCuting)
+        switch (player.InteractionTool)
         {
-            anim.SetInteger("transition", 3);
+            case 0:
+                break;
+            case 1:
+                if (player.IsCuting)
+                {
+                    OnCutting();
+                }
+                break;
+            case 2:
+                if (player.IsDigging)
+                {
+                    OnDigging();
+                }
+                break;
         }
+    }
+
+    private void OnCutting()
+    {
+        anim.SetInteger("transition", 3);
+    }
+    private void OnDigging()
+    {
+        anim.SetInteger("transition", 4);
     }
 
     void OnRotate()
@@ -78,7 +100,7 @@ public class PlayerAnim : MonoBehaviour
     {
         if (value > 0)
         {
-             transform.localScale = SCALE_NORMAL;
+            transform.localScale = SCALE_NORMAL;
         }
         else if (value < 0)
         {
