@@ -6,18 +6,22 @@ public class Player : MonoBehaviour
     public float speed;
     public float runSpeed;
     public float initialSpeed;
-    
+
     private Vector2 direction;
     public Vector2 Direction { get => direction; private set => direction = value; }
 
-    private bool isRuning;
-    private bool isRolling;
-    private bool isCuting;
+    private bool isRuning = false;
+    private bool isRolling = false;
+    private bool isCuting = false;
+    private bool isDigging = false;
+    private int interactionTool;
 
     public bool IsRuning { get => isRuning; private set => isRuning = value; }
     public bool IsRolling { get => isRolling; private set => isRolling = value; }
     public bool IsCuting { get => isCuting; private set => isCuting = value; }
-    
+    public bool IsDigging { get => isDigging; private set => isDigging = value; }
+    public int InteractionTool { get => interactionTool; private set => interactionTool = value; }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,10 +32,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        OnInteractionTool();
         OnInput();
         OnRun();
         OnRolling();
         OnCuting();
+        OnDigging();
     }
 
     private void FixedUpdate()
@@ -63,7 +69,6 @@ public class Player : MonoBehaviour
             speed = initialSpeed;
             isRuning = false;
         }
-        
     }
 
     private void OnRolling()
@@ -78,7 +83,6 @@ public class Player : MonoBehaviour
             isRolling = false;
         }
     }
-    
     private void OnCuting()
     {
         if (Input.GetMouseButton(0))
@@ -94,5 +98,40 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnDigging()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            isDigging = true;
+            speed = 0;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isDigging = false;
+            speed = initialSpeed;
+        }
+    }
+
+    private void OnInteractionTool()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            interactionTool = 0;
+            Debug.Log("Mão vazias!");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            interactionTool = 1;
+            Debug.Log("Machado Equipado!");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            interactionTool = 2;
+            Debug.Log("Pá Equipada!");
+        }
+    }
     #endregion
 }
