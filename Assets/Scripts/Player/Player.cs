@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
         OnInteractionTool();
         OnInput();
         OnRun();
@@ -84,7 +83,6 @@ public class Player : MonoBehaviour
             isRolling = false;
         }
     }
-
     private void OnCuting()
     {
         if (Input.GetMouseButton(0))
@@ -135,6 +133,5 @@ public class Player : MonoBehaviour
             Debug.Log("Pá Equipada!");
         }
     }
-
     #endregion
 }
